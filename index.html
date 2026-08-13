@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angat Dam &mdash; Reservoir Water Level</title>
+<meta name="description" content="Reservoir water level of Angat Dam, tracked from PAGASA's public dam bulletin.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanline" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="mark">
+      <span class="mark-dot" aria-hidden="true"></span>
+      <span>GAUGING STATION &middot; NORZAGARAY, BULACAN</span>
+    </div>
+    <h1>Angat Dam</h1>
+    <p class="subhead">Reservoir water level, tracked from PAGASA&rsquo;s dam bulletin</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="hero">
+    <div class="gauge-col">
+      <svg id="gauge" viewBox="0 0 220 560" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="gaugeTitle">
+        <title id="gaugeTitle">Water column showing Angat Dam's current reservoir level against its key thresholds</title>
+        <defs>
+          <linearGradient id="waterFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3FC4E8"/>
+            <stop offset="100%" stop-color="#0E5A7C"/>
+          </linearGradient>
+          <clipPath id="tubeClip">
+            <rect x="18" y="18" width="120" height="524" rx="14"/>
+          </clipPath>
+        </defs>
+
+        <!-- tube outline -->
+        <rect x="18" y="18" width="120" height="524" rx="14" class="tube-outline"/>
+
+        <!-- fill (height set by JS) -->
+        <g clip-path="url(#tubeClip)">
+          <rect id="waterRect" x="18" y="542" width="120" height="0" fill="url(#waterFill)"/>
+          <path id="waterWave" d="" fill="url(#waterFill)"/>
+        </g>
+
+        <!-- threshold lines + labels, positioned by JS -->
+        <g id="thresholds"></g>
+      </svg>
+    </div>
+
+    <div class="readout-col">
+      <div class="readout-primary">
+        <span class="eyebrow" id="statusLabel">&mdash;</span>
+        <div class="big-number">
+          <span id="rwlValue">&hellip;</span><span class="unit">m</span>
+        </div>
+        <div class="delta" id="deltaValue">loading latest reading&hellip;</div>
+      </div>
+
+      <dl class="readout-grid">
+        <div><dt>Normal High Water Level</dt><dd id="nhwlValue">&mdash;</dd></div>
+        <div><dt>Rule Curve (seasonal target)</dt><dd id="ruleCurveValue">&mdash;</dd></div>
+        <div><dt>Deviation from NHWL</dt><dd id="devNhwlValue">&mdash;</dd></div>
+        <div><dt>Deviation from Rule Curve</dt><dd id="devRuleValue">&mdash;</dd></div>
+      </dl>
+
+      <div class="observed" id="observedLine">&mdash;</div>
+    </div>
+  </section>
+
+  <section class="history">
+    <div class="history-head">
+      <h2>Recent trend</h2>
+      <span class="history-count" id="historyCount"></span>
+    </div>
+    <svg id="chart" viewBox="0 0 900 220" preserveAspectRatio="none" role="img" aria-label="Line chart of Angat Dam reservoir level over recent readings"></svg>
+    <div class="history-footnote">Each point is one PAGASA bulletin reading, most PAGASA dam bulletins post once or twice daily &mdash; this isn&rsquo;t a live sensor feed.</div>
+  </section>
+
+  <section class="legend">
+    <h2>Reading the gauge</h2>
+    <ul>
+      <li><span class="swatch nhwl"></span> <strong>Normal High Water Level (NHWL)</strong> &mdash; the dam&rsquo;s full-supply level, 210.00&nbsp;m.</li>
+      <li><span class="swatch rule"></span> <strong>Rule Curve</strong> &mdash; PAGASA&rsquo;s day-by-day operating target for this time of year.</li>
+      <li><span class="swatch critical"></span> <strong>Critical level</strong> &mdash; 160&nbsp;m, the threshold PAGASA and MWSS treat as a water-supply concern.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Data sourced from the <a href="https://pagasa.dost.gov.ph/flood" target="_blank" rel="noopener">PAGASA Dam Water Level Update</a>, refreshed on a schedule by this site&rsquo;s own scraper &mdash; not an official PAGASA product. Verify against the source before acting on it, especially during typhoons or advisories.</p>
+    <p class="meta">Last data refresh attempt: <span id="footerUpdated">&mdash;</span></p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
