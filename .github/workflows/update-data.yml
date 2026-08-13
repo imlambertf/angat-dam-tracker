@@ -1,0 +1,36 @@
+name: Update Angat Dam data
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scrape latest reading
+        run: python scripts/scrape.py
+
+      - name: Commit and push if data changed
+        run: |
+          if git diff --quiet -- data/angat.json; then
+            echo "No change in data/angat.json"
+            exit 0
+          fi
+          git config user.name "angat-dam-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/angat.json
+          git commit -m "Update Angat Dam reading $(date -u +'%Y-%m-%dT%H:%MZ')"
+          git push
