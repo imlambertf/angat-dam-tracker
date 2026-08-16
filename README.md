@@ -1,5 +1,6 @@
-# Angat Dam Water Level Tracker
+Use this link: https://imlambertf.github.io/angat-dam-tracker/
 
+# Angat Dam Water Level Tracker
 A small static site that shows Angat Dam's reservoir water level, sourced
 from PAGASA's public [Dam Water Level Update](https://pagasa.dost.gov.ph/flood).
 A scheduled GitHub Action re-scrapes the page and commits the latest
