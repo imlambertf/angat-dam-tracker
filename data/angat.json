@@ -1,15 +1,15 @@
 {
   "source": "PAGASA Dam Water Level Update (https://pagasa.dost.gov.ph/flood)",
-  "lastUpdated": "2026-08-29T17:42:00+08:00",
+  "lastUpdated": "2026-08-29T22:49:56+08:00",
   "current": {
     "date": "2026-08-29",
-    "observationTime": "08:00 AM",
-    "rwl": 194.5,
-    "deviation24hr": 1.4,
+    "observationTime": "09:00 PM",
+    "rwl": 196.35,
+    "deviation24hr": 1.85,
     "nhwl": 210.0,
-    "deviationFromNhwl": -15.5,
+    "deviationFromNhwl": -13.65,
     "ruleCurve": 183.27,
-    "deviationFromRuleCurve": 11.23
+    "deviationFromRuleCurve": 13.08
   },
   "history": [
     {
@@ -124,6 +124,12 @@
       "date": "2026-08-29",
       "time": "08:00 AM",
       "rwl": 194.5,
+      "ruleCurve": 183.27
+    },
+    {
+      "date": "2026-08-29",
+      "time": "09:00 PM",
+      "rwl": 196.35,
       "ruleCurve": 183.27
     }
   ]
